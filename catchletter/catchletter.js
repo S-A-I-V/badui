@@ -5,8 +5,7 @@ const resetButton = document.getElementById('reset-btn');
 const bewareMessage = document.getElementById('beware-message');
 
 // The string we want to use for falling letters
-const targetString = "saideep";
-let targetIndex = 0;
+const targetString = "abcdefghijklmnopqrstuvwxyz";
 
 function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -45,10 +44,8 @@ const generateLetterDiv = (left_padding , divid) => {
 }
 
 const randomChar = () => {
-    // Get the next character from the target string
-    let char = targetString[targetIndex];
-    // Move to the next character or loop back to the start
-    targetIndex = (targetIndex + 1) % targetString.length;
+    // Get a random character from the target string
+    let char = targetString[getRandomInt(0, targetString.length)];
     return char;
 }
 
