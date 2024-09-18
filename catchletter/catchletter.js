@@ -4,7 +4,6 @@ const SubmitButton = document.getElementById('submit-btn');
 const resetButton = document.getElementById('reset-btn');
 const bewareMessage = document.getElementById('beware-message');
 
-// The string we want to use for falling letters
 const targetString = "abcdefghijklmnopqrstuvwxyz";
 
 function getRandomInt(min, max) {
@@ -44,7 +43,6 @@ const generateLetterDiv = (left_padding , divid) => {
 }
 
 const randomChar = () => {
-    // Get a random character from the target string
     let char = targetString[getRandomInt(0, targetString.length)];
     return char;
 }
@@ -73,7 +71,6 @@ function stopLoginLoop(){
 }
 
 function startLoginLoop(){
-    // Restart the loop if needed
     loginLoopInterval = setInterval(loginLoop, 10);
 }
 
@@ -124,18 +121,14 @@ function resetGame() {
     divList.forEach(element => removeElement(element.id));
     divList = [];
     targetIndex = 0;
-    // Restart the loop
     startLoginLoop();
 }
 
 function showPartyPoppers() {
-    // Stop the falling letters
     stopLoginLoop();
     
-    // Create a setInterval to generate confetti continuously for 10 seconds
     const confettiInterval = setInterval(createConfetti, 100); // Creates a confetti piece every 100ms
 
-    // Stop the interval after 10 seconds
     setTimeout(() => {
         clearInterval(confettiInterval);
     }, 10000); // 10 seconds
@@ -145,11 +138,10 @@ function createConfetti() {
     const confetti = document.createElement('div');
     confetti.classList.add('confetti');
     
-    // Define rainbow colors
     const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     
-    confetti.style.backgroundColor = randomColor;  // Set a random rainbow color
+    confetti.style.backgroundColor = randomColor; 
     confetti.style.left = `${Math.random() * 100}%`;
     confetti.style.animationDelay = `${Math.random() * 2}s`;
     document.body.appendChild(confetti);
@@ -172,7 +164,6 @@ document.addEventListener("keydown", function(event) {
     Catcher.style.left=`${catcherData.x}px`
 });
 
-// Position beware message next to reset button when hovered
 resetButton.addEventListener('mouseover', () => {
     const rect = resetButton.getBoundingClientRect();
     bewareMessage.style.top = `${rect.bottom + 5}px`;
@@ -184,12 +175,10 @@ resetButton.addEventListener('mouseout', () => {
     bewareMessage.style.display = 'none'; // Hide beware message
 });
 
-// Function to move reset button to a random position within the viewport
 function moveResetButton() {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
-    // Calculate random positions within the viewport, subtracting the button's size to keep it in view
     const randomX = Math.random() * (viewportWidth - resetButton.offsetWidth);
     const randomY = Math.random() * (viewportHeight - resetButton.offsetHeight);
 
@@ -197,5 +186,4 @@ function moveResetButton() {
     resetButton.style.top = `${randomY}px`;
 }
 
-// Move the button every 2 seconds
 setInterval(moveResetButton, 2000);
